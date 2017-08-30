@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="mainApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="\bower_components\bootstrap\dist\css\bootstrap.min.css">
+    <link rel="stylesheet" href="\bower_components\components-font-awesome\css\font-awesome.min.css">
+</head>
+
+<style>
+    body {
+        background-color: #FFF;
+        font-family: "Segoe UI", "Segoe WP", "Helvetica Neue", sans-serif;
+        color: #333;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    .h1,
+    .h2,
+    .h3,
+    .h4,
+    .h5 {
+        font-weight: 400;
+        font-size: 72px;
+        font-family: "Segoe UI", "Segoe WP", "Helvetica Neue", sans-serif;
+    }
+
+    .page-header {
+        border-bottom: 1px solid lightgray !important;
+    }
+
+    .panel,
+    .btn-primary,
+    .label {
+        border-radius: 0px !important;
+    }
+
+    .panel-heading {
+        background-color: #5f5f5f !important;
+        color: white !important;
+        font-size: 24px !important;
+    }
+
+    .panel-footer .badge {
+        background-color: #5f5f5f;
+    }
+
+    .label {
+        color: black;
+    }
+
+    .strike {
+        text-decoration: line-through;
+    }
+</style>
+
+<body data-ng-controller="mainCtrl as vm">
+
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <h1><i class="fa fa-thumb-tack" aria-hidden="true"></i> Todo</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <h4 class="panel-title pull-left" style="padding-top: 7.5px;"><i class="fa fa-list" aria-hidden="true"></i> Recent Todo</h4>
+                    <div class="btn-group pull-right">
+                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-plus-square" aria-hidden="true"></i> Add</a>
+                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Clear all</a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Priority</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="ele in vm.todos">
+                                <td><input type="checkbox" data-ng-disabled="ele.isCompleted" data-ng-model="isClicked" data-ng-click="vm.todoClicked(isClicked,$index)"
+                                        data-ng-checked="ele.isCompleted"></td>
+                                <td><span data-ng-bind="ele.id" data-ng-class="{strike:ele.isCompleted}"></span></td>
+                                <td><span data-ng-bind="ele.name" data-ng-class="{strike:ele.isCompleted}"></span></td>
+                                <td><span data-ng-bind="ele.status" data-ng-class="{strike:ele.isCompleted}"></span></td>
+                                <td><span class="label" data-ng-class="{'label-warning':ele.priority=='Medium','label-danger':ele.priority=='High','label-info':ele.priority=='Low',strike:ele.isCompleted}"
+                                        data-ng-bind="ele.priority"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <p>Total Items: <span class="badge" data-ng-bind="vm.todos.length"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Include compiled and minified javaScript files here-->
+    <script src="\bower_components\jquery\dist\jquery.min.js"></script>
+    <script src="\bower_components\bootstrap\dist\js\bootstrap.min.js"></script>
+    <script src="\bower_components\angular\angular.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
